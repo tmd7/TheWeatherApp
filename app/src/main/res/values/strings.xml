@@ -10,4 +10,7 @@
   <string name="pressure">Pressure: %c, hPa</string>
   <string name="humidity">Humidity: %c, %</string>
   <string name="wind">Wind: %c, meter/sec</string>
+  <string name="find_city">Find city</string>
+  <string name="sensors">Sensors</string>
+  <string name="use_geo">Use geo</string>
 </resources>

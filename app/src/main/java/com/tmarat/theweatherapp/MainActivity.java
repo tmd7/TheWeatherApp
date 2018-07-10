@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.tmarat.theweatherapp.R;
+import com.tmarat.theweatherapp.ui.FragmentWelcomeScreen;
 import com.tmarat.theweatherapp.ui.WeatherInfoFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -26,7 +27,9 @@ public class MainActivity extends AppCompatActivity
     setToolBar();
     setNavigationView();
 
-    startFragment(R.id.main_container, WeatherInfoFragment.initFragment());
+    if (savedInstanceState == null) {
+      startFragment(R.id.main_container, FragmentWelcomeScreen.init());
+    }
   }
 
   private void startFragment(int containerViewId, Fragment fragment) {
