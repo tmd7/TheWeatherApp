@@ -8,9 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.tmarat.theweatherapp.Contract;
+import com.tmarat.theweatherapp.Presenter;
 import com.tmarat.theweatherapp.R;
 
 public class WeatherInfoFragment extends Fragment implements Contract.View {
+
+  private Contract.Presenter presenter;
 
   public static WeatherInfoFragment initFragment() {
     return new WeatherInfoFragment();
@@ -19,6 +22,7 @@ public class WeatherInfoFragment extends Fragment implements Contract.View {
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
+    presenter = new Presenter(this);
   }
 
   @Nullable @Override
