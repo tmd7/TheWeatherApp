@@ -1,10 +1,8 @@
 package com.tmarat.theweatherapp;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.tmarat.theweatherapp.R;
+import com.tmarat.theweatherapp.ui.WeatherInfoFragment;
 
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
@@ -25,6 +25,15 @@ public class MainActivity extends AppCompatActivity
 
     setToolBar();
     setNavigationView();
+
+    startFragment(R.id.main_container, WeatherInfoFragment.initFragment());
+  }
+
+  private void startFragment(int containerViewId, Fragment fragment) {
+    getSupportFragmentManager()
+        .beginTransaction()
+        .replace(containerViewId,fragment)
+        .commit();
   }
 
   private void setNavigationView() {
