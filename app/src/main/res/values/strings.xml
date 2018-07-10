@@ -6,4 +6,8 @@
   <string name="nav_header_subtitle">android.studio@android.com</string>
   <string name="nav_header_desc">Navigation header</string>
   <string name="action_settings">Settings</string>
+  <string name="symbol_grade">°</string>
+  <string name="pressure">Pressure: %c, hPa</string>
+  <string name="humidity">Humidity: %c, %</string>
+  <string name="wind">Wind: %c, meter/sec</string>
 </resources>

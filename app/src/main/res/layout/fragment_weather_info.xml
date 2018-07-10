@@ -1,7 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
+    android:gravity="center"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_layout_med"
+    >
 
-</android.support.constraint.ConstraintLayout>
+  <LinearLayout
+      android:gravity="center"
+      android:orientation="horizontal"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      >
+
+    <ImageView
+        android:layout_marginRight="@dimen/margin_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/d10"
+        />
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+      <TextView
+          android:textSize="@dimen/header_city_name_size"
+          android:textStyle="bold"
+          android:textColor="#3a3939"
+          android:id="@+id/header_city_name"
+          tools:text="Moscow"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          />
+
+      <TextView
+          android:textColor="#625d5d"
+          android:id="@+id/header_date"
+          tools:text="Friday, 25 June"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          />
+    </LinearLayout>
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_gravity="center_horizontal"
+      android:orientation="horizontal"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      >
+    <TextView
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_tem_size"
+        tools:text="31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        android:text="@string/symbol_grade"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_gravity="center_horizontal"
+        android:textSize="70sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+  </LinearLayout>
+
+  <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      >
+    <TextView
+        tools:text="@string/pressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        tools:text="@string/humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <TextView
+        tools:text="@string/wind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+  </LinearLayout>
+
+</LinearLayout>
