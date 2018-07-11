@@ -9,4 +9,10 @@ public class Presenter implements Contract.Presenter {
     this.view = view;
     this.model = new Model();
   }
+
+  @Override public void checkInput(StringBuilder builder) {
+    if (builder == null) {
+
+    }
+  }
 }

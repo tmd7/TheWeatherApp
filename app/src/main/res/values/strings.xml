@@ -13,4 +13,6 @@
   <string name="find_city">Find city</string>
   <string name="sensors">Sensors</string>
   <string name="use_geo">Use geo</string>
+  <string name="send">send</string>
+  <string name="empty_input">Empty input</string>
 </resources>

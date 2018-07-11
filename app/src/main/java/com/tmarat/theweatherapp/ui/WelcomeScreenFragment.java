@@ -10,32 +10,44 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.tmarat.theweatherapp.R;
 
-public class FragmentWelcomeScreen extends Fragment implements View.OnClickListener {
+public class WelcomeScreenFragment extends Fragment implements View.OnClickListener {
 
-  private static final String TAG = FragmentWelcomeScreen.class.getSimpleName();
+  private static final String TAG = WelcomeScreenFragment.class.getSimpleName();
 
   public static Fragment init() {
-    return new FragmentWelcomeScreen();
+    return new WelcomeScreenFragment();
+  }
+
+  @Override public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
   }
 
   @Nullable @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_welcome_screen, container, false);
+    setOnClickListener(view);
     return view;
+  }
+
+  private void setOnClickListener(View view) {
+    view.findViewById(R.id.find_city).setOnClickListener(this);
+    view.findViewById(R.id.sensors).setOnClickListener(this);
+    view.findViewById(R.id.use_geo).setOnClickListener(this);
   }
 
   @Override public void onClick(View v) {
     switch (v.getId()) {
-      case R.id.find_city :
-        //startFragment(R.id.main_container, FragmentFindCity.init());
+      case R.id.find_city:
+        Log.d(TAG, "onClick: find city");
+        startFragment(R.id.main_container, FindCityFragment.init());
         break;
 
-      case R.id.sensors :
+      case R.id.sensors:
         //startFragment();
         break;
 
-      case R.id.use_geo :
+      case R.id.use_geo:
         //startFragment();
         break;
     }
@@ -46,7 +58,6 @@ public class FragmentWelcomeScreen extends Fragment implements View.OnClickListe
       getActivity().getSupportFragmentManager()
           .beginTransaction()
           .replace(containerViewId, fragment)
-          .addToBackStack("")
           .commit();
     } else {
       Log.d(TAG, "startFragment: getActivity == null");

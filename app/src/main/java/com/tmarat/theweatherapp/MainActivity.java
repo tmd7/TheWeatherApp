@@ -10,36 +10,35 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import com.tmarat.theweatherapp.R;
-import com.tmarat.theweatherapp.ui.FragmentWelcomeScreen;
-import com.tmarat.theweatherapp.ui.WeatherInfoFragment;
+import android.widget.Toast;
+import com.tmarat.theweatherapp.ui.WelcomeScreenFragment;
 
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener {
 
-  Toolbar toolbar;
+  private Toolbar toolbar;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    setToolBar();
-    setNavigationView();
+    setupToolBar();
+    setupNavigationView();
 
     if (savedInstanceState == null) {
-      startFragment(R.id.main_container, FragmentWelcomeScreen.init());
+      startFragment(R.id.main_container, WelcomeScreenFragment.init());
     }
   }
 
   private void startFragment(int containerViewId, Fragment fragment) {
     getSupportFragmentManager()
         .beginTransaction()
-        .replace(containerViewId,fragment)
+        .replace(containerViewId, fragment)
         .commit();
   }
 
-  private void setNavigationView() {
+  private void setupNavigationView() {
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
         this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity
     navigationView.setNavigationItemSelectedListener(this);
   }
 
-  private void setToolBar() {
+  private void setupToolBar() {
     toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
   }
