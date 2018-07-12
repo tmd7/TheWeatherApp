@@ -11,5 +11,7 @@ public interface Contract {
     void checkInput(String s);
   }
 
-  interface Model{}
+  interface Model{
+    void getData(String userInput);
+  }
 }

@@ -15,7 +15,8 @@ public class Presenter implements Contract.Presenter {
     if (userInput.trim().equals("")) {
       view.showToast(R.string.empty_input);
     } else {
-      // TODO: 12.07.2018 pass userInput to model
+      // TODO: 12.07.2018 pass userInput to model: model.getData(userInput)
+      model.getData(userInput);
     }
   }
 }
