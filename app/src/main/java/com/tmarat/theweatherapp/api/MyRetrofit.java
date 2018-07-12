@@ -12,6 +12,7 @@ public class MyRetrofit {
   private static final String API = "be4254a9c1592f329d3b479b522e69c3";
 
   private MyRetrofit() {
+    //use lazy inti = initRetrofit()
   }
 
   public static Call<WeatherRequest> initRetrofit(String cityName) {
