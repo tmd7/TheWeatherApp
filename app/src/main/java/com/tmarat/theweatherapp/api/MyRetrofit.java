@@ -9,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MyRetrofit {
   private static final String BASE_URL = "http://api.openweathermap.org/";
+  private static final String UNITS = "metric";
   private static final String API = "be4254a9c1592f329d3b479b522e69c3";
 
   private MyRetrofit() {

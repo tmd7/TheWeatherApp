@@ -11,6 +11,7 @@ public class WeatherData {
   private String hum;
   private String press;
   private String wind;
+  private String cod;
 
   private WeatherData() {
     //Uses lazy init
@@ -23,12 +24,18 @@ public class WeatherData {
     return weatherData;
   }
 
-  public void setWeatherData(String cityName, String tem, String hum, String press, String wind) {
+  public WeatherData getWeatherData() {
+    return weatherData;
+  }
+
+  public void setWeatherData(String cityName, String tem, String hum, String press, String wind,
+      String cod) {
     this.cityName = cityName == null ? NO_DATA : cityName;
     this.tem = tem == null ? NO_DATA : tem;
     this.hum = hum == null ? NO_DATA : hum;
     this.press = press == null ? NO_DATA : press;
     this.wind = wind == null ? NO_DATA : wind;
+    this.cod = cod == null ? NO_DATA : cod;
   }
 
   public String getCityName() {
@@ -49,5 +56,9 @@ public class WeatherData {
 
   public String getWind() {
     return wind;
+  }
+
+  public String getCod() {
+    return cod;
   }
 }

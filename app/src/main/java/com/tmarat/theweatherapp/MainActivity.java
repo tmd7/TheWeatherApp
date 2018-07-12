@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+import com.tmarat.theweatherapp.api.WeatherData;
+import com.tmarat.theweatherapp.ui.WeatherInfoFragment;
 import com.tmarat.theweatherapp.ui.WelcomeScreenFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -20,6 +22,10 @@ public class MainActivity extends AppCompatActivity
   private static final String TAG = MainActivity.class.getSimpleName();
   private Toolbar toolbar;
   private Contract.Presenter presenter;
+
+  private WeatherData weatherData;
+
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -120,5 +126,10 @@ public class MainActivity extends AppCompatActivity
   @Override public void oButtonClickListener(String userInput) {
     Log.d(TAG, "oButtonClickListener: user input " + userInput);
     presenter.checkInput(userInput);
+  }
+
+  @Override public void getWeatherData(WeatherData weatherData) {
+    this.weatherData = weatherData;
+    startFragment(R.id.main_container, WeatherInfoFragment.init());
   }
 }

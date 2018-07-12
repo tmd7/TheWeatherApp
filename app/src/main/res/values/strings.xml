@@ -15,4 +15,5 @@
   <string name="use_geo">Use geo</string>
   <string name="send">send</string>
   <string name="empty_input">Empty input</string>
+  <string name="server_is_not_responding">City don\'t found or server isn\'t responding</string>
 </resources>
