@@ -7,8 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.tmarat.theweatherapp.Contract;
-import com.tmarat.theweatherapp.Presenter;
 import com.tmarat.theweatherapp.R;
 
 public class WeatherInfoFragment extends Fragment {

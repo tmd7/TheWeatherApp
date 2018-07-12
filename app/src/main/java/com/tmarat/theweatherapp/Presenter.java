@@ -1,18 +1,21 @@
 package com.tmarat.theweatherapp;
 
+import com.tmarat.theweatherapp.ui.Contract;
+
 public class Presenter implements Contract.Presenter {
+  private Contract.View view;
+  private Contract.Model model;
 
-  private final Contract.View view;
-  private final Contract.Model model;
-
-  public Presenter(Contract.View view) {
+  Presenter(Contract.View view) {
     this.view = view;
     this.model = new Model();
   }
 
-  @Override public void checkInput(StringBuilder builder) {
-    if (builder == null) {
-
+  @Override public void checkInput(String userInput) {
+    if (userInput.trim().equals("")) {
+      view.showToast(R.string.empty_input);
+    } else {
+      // TODO: 12.07.2018 pass userInput to model
     }
   }
 }

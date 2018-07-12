@@ -14,7 +14,7 @@ public class WelcomeScreenFragment extends Fragment implements View.OnClickListe
 
   private static final String TAG = WelcomeScreenFragment.class.getSimpleName();
 
-  public static Fragment init() {
+  public static WelcomeScreenFragment init() {
     return new WelcomeScreenFragment();
   }
 
@@ -25,8 +25,10 @@ public class WelcomeScreenFragment extends Fragment implements View.OnClickListe
   @Nullable @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
+
     View view = inflater.inflate(R.layout.fragment_welcome_screen, container, false);
     setOnClickListener(view);
+
     return view;
   }
 

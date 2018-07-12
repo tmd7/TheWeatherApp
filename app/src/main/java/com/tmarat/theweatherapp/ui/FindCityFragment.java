@@ -1,5 +1,7 @@
 package com.tmarat.theweatherapp.ui;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,9 +17,12 @@ public class FindCityFragment extends Fragment {
   private TextInputEditText input;
   private StringBuilder builder;
 
+  private Contract.View listener;
+
   public static FindCityFragment init() {
     return new FindCityFragment();
   }
+
 
   @Override public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -36,7 +41,16 @@ public class FindCityFragment extends Fragment {
   private void setButtonOnclickListener(View view) {
     view.findViewById(R.id.bt_send).setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
+
         builder.append(input.getText().toString().trim());
+
+        try {
+          listener = (Contract.View) getActivity();
+        } catch (ClassCastException e) {
+          throw new ClassCastException(getActivity().toString() + "must implement Contract.View");
+        }
+
+        listener.oButtonClickListener(builder.toString());
       }
     });
   }

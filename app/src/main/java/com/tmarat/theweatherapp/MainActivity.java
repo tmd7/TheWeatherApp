@@ -8,27 +8,31 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+import com.tmarat.theweatherapp.ui.Contract;
+import com.tmarat.theweatherapp.ui.FindCityFragment;
 import com.tmarat.theweatherapp.ui.WelcomeScreenFragment;
 
 public class MainActivity extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener {
+    implements NavigationView.OnNavigationItemSelectedListener, Contract.View {
 
+  private static final String TAG = MainActivity.class.getSimpleName();
   private Toolbar toolbar;
+  private Contract.Presenter presenter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+    presenter = new Presenter(this);
 
     setupToolBar();
     setupNavigationView();
 
-    if (savedInstanceState == null) {
-      startFragment(R.id.main_container, WelcomeScreenFragment.init());
-    }
+    startFragment(R.id.main_container, WelcomeScreenFragment.init());
   }
 
   private void startFragment(int containerViewId, Fragment fragment) {
@@ -109,5 +113,14 @@ public class MainActivity extends AppCompatActivity
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     drawer.closeDrawer(GravityCompat.START);
     return true;
+  }
+
+  @Override public void showToast(int rsId) {
+    Toast.makeText(this, rsId, Toast.LENGTH_SHORT).show();
+  }
+
+  @Override public void oButtonClickListener(String userInput) {
+    Log.d(TAG, "oButtonClickListener: user input " + userInput);
+    presenter.checkInput(userInput);
   }
 }
