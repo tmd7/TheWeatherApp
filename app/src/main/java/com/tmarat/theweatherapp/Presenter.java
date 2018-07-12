@@ -1,7 +1,5 @@
 package com.tmarat.theweatherapp;
 
-import com.tmarat.theweatherapp.ui.Contract;
-
 public class Presenter implements Contract.Presenter {
   private Contract.View view;
   private Contract.Model model;

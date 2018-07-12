@@ -12,8 +12,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
-import com.tmarat.theweatherapp.ui.Contract;
-import com.tmarat.theweatherapp.ui.FindCityFragment;
 import com.tmarat.theweatherapp.ui.WelcomeScreenFragment;
 
 public class MainActivity extends AppCompatActivity
