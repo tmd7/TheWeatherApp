@@ -50,8 +50,4 @@ public class WeatherData {
   public String getWind() {
     return wind;
   }
-
-  public WeatherData getWeatherData() {
-    return weatherData;
-  }
 }
