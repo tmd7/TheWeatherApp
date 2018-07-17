@@ -24,7 +24,7 @@ public class WeatherInfoFragment extends Fragment {
   private TextView textViewHum;
   private TextView textViewWind;
 
-  public static WeatherInfoFragment init(WeatherData  weatherData) {
+  public static WeatherInfoFragment init(WeatherData weatherData) {
     WeatherInfoFragment fragment = new WeatherInfoFragment();
     Bundle args = new Bundle();
     args.putParcelable(WEATHER_INFO, weatherData);
@@ -46,7 +46,12 @@ public class WeatherInfoFragment extends Fragment {
 
     View view = inflater.inflate(R.layout.fragment_weather_info, container, false);
     setupUI(view);
+    setWeatherData();
 
+    return view;
+  }
+
+  private void setWeatherData() {
     WeatherData weatherData = getWeatherData();
     textViewCityName.setText(weatherData.getCityName());
     textViewDate.setText(getCurrentDate());
@@ -54,8 +59,6 @@ public class WeatherInfoFragment extends Fragment {
     textViewPress.setText(weatherData.getPress());
     textViewHum.setText(weatherData.getHum());
     textViewWind.setText(weatherData.getWind());
-
-    return view;
   }
 
   private void setupUI(View view) {
@@ -69,6 +72,6 @@ public class WeatherInfoFragment extends Fragment {
 
   public String getCurrentDate() {
     Calendar calendar = Calendar.getInstance();
-   return new SimpleDateFormat("yyyy-MM-dd", Locale.UK).format(calendar.getTime());
+    return new SimpleDateFormat("yyyy-MM-dd", Locale.UK).format(calendar.getTime());
   }
 }

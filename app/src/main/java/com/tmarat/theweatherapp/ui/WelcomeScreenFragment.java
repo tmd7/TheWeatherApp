@@ -8,11 +8,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.tmarat.theweatherapp.Contract;
 import com.tmarat.theweatherapp.R;
+import com.tmarat.theweatherapp.hardware.Sensors;
 
 public class WelcomeScreenFragment extends Fragment implements View.OnClickListener {
 
   private static final String TAG = WelcomeScreenFragment.class.getSimpleName();
+  private Sensors sensors;
 
   public static WelcomeScreenFragment init() {
     return new WelcomeScreenFragment();
@@ -32,6 +35,13 @@ public class WelcomeScreenFragment extends Fragment implements View.OnClickListe
     return view;
   }
 
+  @Override public void onPause() {
+    super.onPause();
+    if (sensors != null) {
+      sensors.unregisterSensorListener();
+    }
+  }
+
   private void setOnClickListener(View view) {
     view.findViewById(R.id.find_city).setOnClickListener(this);
     view.findViewById(R.id.sensors).setOnClickListener(this);
@@ -46,7 +56,15 @@ public class WelcomeScreenFragment extends Fragment implements View.OnClickListe
         break;
 
       case R.id.sensors:
-        //startFragment();
+        if (getActivity() != null) {
+          sensors = new Sensors(getActivity().getApplicationContext());
+        }
+        if (sensors.doNotHaveAnySensors()) {
+          Contract.View cv = (Contract.View) getActivity();
+          cv.showToast(R.string.do_not_have_sensors);
+        } else {
+          startFragment(R.id.main_container, WeatherInfoFragment.init(sensors.getWeatherData()));
+        }
         break;
 
       case R.id.use_geo:

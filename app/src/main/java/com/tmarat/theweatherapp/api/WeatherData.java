@@ -29,6 +29,30 @@ public class WeatherData implements Parcelable{
     cod = in.readString();
   }
 
+  public void setCityName(String cityName) {
+    this.cityName = cityName;
+  }
+
+  public void setTem(String tem) {
+    this.tem = tem;
+  }
+
+  public void setHum(String hum) {
+    this.hum = hum;
+  }
+
+  public void setPress(String press) {
+    this.press = press;
+  }
+
+  public void setWind(String wind) {
+    this.wind = wind;
+  }
+
+  public void setCod(String cod) {
+    this.cod = cod;
+  }
+
   public static final Creator<WeatherData> CREATOR = new Creator<WeatherData>() {
     @Override
     public WeatherData createFromParcel(Parcel in) {
