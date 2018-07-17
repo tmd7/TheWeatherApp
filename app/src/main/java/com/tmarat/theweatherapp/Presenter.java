@@ -1,7 +1,6 @@
 package com.tmarat.theweatherapp;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import com.tmarat.theweatherapp.api.WeatherData;
 
@@ -16,7 +15,7 @@ public class Presenter implements Contract.Presenter {
   }
 
   @Override public void checkInput(String userInput) {
-    if (userInput == null) {
+    if (userInput.equals("")) {
 
       view.showToast(R.string.empty_input);
 
@@ -29,7 +28,7 @@ public class Presenter implements Contract.Presenter {
           Log.d(TAG, "onResponse: " + weatherData.getCityName());
 
           //Passes data to activity
-          view.getWeatherData(weatherData);
+          view.setWeatherData(weatherData);
         }
 
         @Override public void onFailure() {

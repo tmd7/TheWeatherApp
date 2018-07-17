@@ -60,6 +60,7 @@ public class WelcomeScreenFragment extends Fragment implements View.OnClickListe
       getActivity().getSupportFragmentManager()
           .beginTransaction()
           .replace(containerViewId, fragment)
+          .addToBackStack(null)
           .commit();
     } else {
       Log.d(TAG, "startFragment: getActivity == null");

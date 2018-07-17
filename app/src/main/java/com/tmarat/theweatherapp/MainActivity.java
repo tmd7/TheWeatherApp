@@ -23,10 +23,6 @@ public class MainActivity extends AppCompatActivity
   private Toolbar toolbar;
   private Contract.Presenter presenter;
 
-  private WeatherData weatherData;
-
-
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -128,8 +124,7 @@ public class MainActivity extends AppCompatActivity
     presenter.checkInput(userInput);
   }
 
-  @Override public void getWeatherData(WeatherData weatherData) {
-    this.weatherData = weatherData;
-    startFragment(R.id.main_container, WeatherInfoFragment.init());
+  @Override public void setWeatherData(WeatherData weatherData) {
+    startFragment(R.id.main_container, WeatherInfoFragment.init(weatherData));
   }
 }

@@ -1,6 +1,9 @@
 package com.tmarat.theweatherapp.api;
 
-public class WeatherData {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class WeatherData implements Parcelable{
 
   private static final String NO_DATA = "n/d";
 
@@ -13,9 +16,30 @@ public class WeatherData {
   private String wind;
   private String cod;
 
-  private WeatherData() {
-    //Uses lazy init
+  public WeatherData() {
+
   }
+
+  public WeatherData(Parcel in) {
+    cityName = in.readString();
+    tem = in.readString();
+    hum = in.readString();
+    press = in.readString();
+    wind = in.readString();
+    cod = in.readString();
+  }
+
+  public static final Creator<WeatherData> CREATOR = new Creator<WeatherData>() {
+    @Override
+    public WeatherData createFromParcel(Parcel in) {
+      return new WeatherData(in);
+    }
+
+    @Override
+    public WeatherData[] newArray(int size) {
+      return new WeatherData[size];
+    }
+  };
 
   public static WeatherData init() {
     if (weatherData == null) {
@@ -60,5 +84,18 @@ public class WeatherData {
 
   public String getCod() {
     return cod;
+  }
+
+  @Override public int describeContents() {
+    return 0;
+  }
+
+  @Override public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(cityName);
+    dest.writeString(tem);
+    dest.writeString(hum);
+    dest.writeString(press);
+    dest.writeString(wind);
+    dest.writeString(cod);
   }
 }

@@ -11,8 +11,7 @@ public interface Contract {
   interface View{
     void showToast(int rsId);
     void oButtonClickListener(String userInput);
-
-    void getWeatherData(WeatherData weatherData);
+    void setWeatherData(WeatherData weatherData);
   }
 
   interface Presenter{
