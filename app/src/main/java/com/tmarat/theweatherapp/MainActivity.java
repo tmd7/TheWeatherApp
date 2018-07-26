@@ -1,6 +1,7 @@
 package com.tmarat.theweatherapp;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 import com.tmarat.theweatherapp.api.WeatherData;
+import com.tmarat.theweatherapp.hardware.Sensors;
+import com.tmarat.theweatherapp.location.Location;
+import com.tmarat.theweatherapp.ui.FindCityFragment;
 import com.tmarat.theweatherapp.ui.WeatherInfoFragment;
 import com.tmarat.theweatherapp.ui.WelcomeScreenFragment;
 
@@ -25,6 +29,8 @@ public class MainActivity extends AppCompatActivity
 
   private Toolbar toolbar;
   private Contract.Presenter presenter;
+
+  private Sensors sensors;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -97,16 +103,35 @@ public class MainActivity extends AppCompatActivity
 
   @SuppressWarnings("StatementWithEmptyBody")
   @Override
-  public boolean onNavigationItemSelected(MenuItem item) {
+  public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
     switch (item.getItemId()) {
+
       case R.id.item_find_a_city:
-        // TODO: 26.07.2018 opens FindCityFragment
+        startFragment(R.id.main_container, FindCityFragment.init());
+        break;
+
+      case R.id.item_use_sensors:
+        useSensors();
+        break;
+
+      case R.id.item_use_geo:
+        new Location(getApplicationContext(), this);
+        break;
     }
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     drawer.closeDrawer(GravityCompat.START);
     return true;
+  }
+
+  private void useSensors() {
+    sensors = new Sensors(getApplicationContext());
+    if (sensors.doesNotHaveAnySensors()) {
+      showToast(R.string.does_not_have_sensors);
+    } else {
+      startFragment(R.id.main_container, WeatherInfoFragment.init(sensors.getWeatherData()));
+    }
   }
 
   @Override public void showToast(int rsId) {

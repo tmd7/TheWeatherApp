@@ -103,7 +103,7 @@ public class Sensors {
     }
   }
 
-  public boolean doNotHaveAnySensors() {
+  public boolean doesNotHaveAnySensors() {
     return getSensorTem() == null || getSensorHum() == null || getSensorPress() == null;
   }
 }

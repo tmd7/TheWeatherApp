@@ -10,13 +10,13 @@
         android:icon="@drawable/ic_menu_camera"
         android:title="Find a city"/>
     <item
-        android:id="@+id/nav_gallery"
+        android:id="@+id/item_use_sensors"
         android:icon="@drawable/ic_menu_gallery"
-        android:title="Gallery"/>
+        android:title="Use sensors"/>
     <item
-        android:id="@+id/nav_slideshow"
+        android:id="@+id/item_use_geo"
         android:icon="@drawable/ic_menu_slideshow"
-        android:title="Slideshow"/>
+        android:title="Use geo location"/>
     <item
         android:id="@+id/nav_manage"
         android:icon="@drawable/ic_menu_manage"

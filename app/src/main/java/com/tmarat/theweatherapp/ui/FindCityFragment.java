@@ -15,7 +15,7 @@ public class FindCityFragment extends Fragment {
 
   private TextInputEditText input;
 
-  private Contract.View listener;
+  private Contract.View contractView;
 
   public static FindCityFragment init() {
     return new FindCityFragment();
@@ -40,12 +40,12 @@ public class FindCityFragment extends Fragment {
       @Override public void onClick(View v) {
 
         try {
-          listener = (Contract.View) getActivity();
+          contractView = (Contract.View) getActivity();
         } catch (ClassCastException e) {
           throw new ClassCastException(getActivity().toString() + "must implement Contract.View");
         }
 
-        listener.oButtonClickListener(input.getText().toString().trim());
+        contractView.oButtonClickListener(input.getText().toString().trim());
       }
     });
   }
