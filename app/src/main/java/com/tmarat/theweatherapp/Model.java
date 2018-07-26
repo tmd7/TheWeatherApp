@@ -15,7 +15,7 @@ public class Model implements Contract.Model {
   @Override public void getData(String userInput,
       final Contract.CallBack callBack) {
 
-    //userInput is not empty, do a request
+    //userInput is not empty, to do a request
     MyRetrofit.initRetrofit(userInput).enqueue(new Callback<WeatherRequest>() {
       @Override
       public void onResponse(Call<WeatherRequest> call, Response<WeatherRequest> response) {

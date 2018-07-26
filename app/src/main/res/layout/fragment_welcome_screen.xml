@@ -1,34 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:gravity="center"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
     >
 
-  <Button
-      android:id="@+id/find_city"
-      android:text="@string/find_city"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:theme="@style/MyButton"
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_gravity="center"
+      android:text="This is a first activity run, please open the nav menu"
       />
 
-  <Button
-      android:id="@+id/sensors"
-      android:text="@string/sensors"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:theme="@style/MyButton"
-      />
-
-  <Button
-      android:id="@+id/use_geo"
-      android:text="@string/use_geo"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:theme="@style/MyButton"
-      />
-
-</LinearLayout>
+</FrameLayout>

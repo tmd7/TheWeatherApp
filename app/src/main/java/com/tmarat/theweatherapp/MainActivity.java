@@ -2,6 +2,7 @@ package com.tmarat.theweatherapp;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,9 +18,11 @@ import com.tmarat.theweatherapp.ui.WeatherInfoFragment;
 import com.tmarat.theweatherapp.ui.WelcomeScreenFragment;
 
 public class MainActivity extends AppCompatActivity
-    implements NavigationView.OnNavigationItemSelectedListener, Contract.View {
+    implements ActivityCompat.OnRequestPermissionsResultCallback,
+    NavigationView.OnNavigationItemSelectedListener, Contract.View {
 
   private static final String TAG = MainActivity.class.getSimpleName();
+
   private Toolbar toolbar;
   private Contract.Presenter presenter;
 
@@ -30,8 +33,10 @@ public class MainActivity extends AppCompatActivity
     presenter = new Presenter(this);
 
     setupToolBar();
+
     setupNavigationView();
 
+    // TODO: 26.07.2018 if that is a first activity run, start the Welcome fragment
     startFragment(R.id.main_container, WelcomeScreenFragment.init());
   }
 
@@ -93,21 +98,10 @@ public class MainActivity extends AppCompatActivity
   @SuppressWarnings("StatementWithEmptyBody")
   @Override
   public boolean onNavigationItemSelected(MenuItem item) {
-    // Handle navigation view item clicks here.
-    int id = item.getItemId();
 
-    if (id == R.id.nav_camera) {
-      // Handle the camera action
-    } else if (id == R.id.nav_gallery) {
-
-    } else if (id == R.id.nav_slideshow) {
-
-    } else if (id == R.id.nav_manage) {
-
-    } else if (id == R.id.nav_share) {
-
-    } else if (id == R.id.nav_send) {
-
+    switch (item.getItemId()) {
+      case R.id.item_find_a_city:
+        // TODO: 26.07.2018 opens FindCityFragment
     }
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
