@@ -25,6 +25,7 @@ public class WeatherInfoFragment extends Fragment {
   private TextView textViewWind;
 
   public static WeatherInfoFragment init(WeatherData weatherData) {
+
     WeatherInfoFragment fragment = new WeatherInfoFragment();
     Bundle args = new Bundle();
     args.putParcelable(WEATHER_INFO, weatherData);

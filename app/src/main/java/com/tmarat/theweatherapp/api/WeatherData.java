@@ -1,3 +1,6 @@
+/**
+ * The POJO class
+ * */
 package com.tmarat.theweatherapp.api;
 
 import android.os.Parcel;

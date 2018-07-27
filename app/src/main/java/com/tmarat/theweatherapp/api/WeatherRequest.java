@@ -1,3 +1,6 @@
+/**
+ * The POJO class, keeps weather data after a client request
+ * */
 package com.tmarat.theweatherapp.api;
 
 import com.google.gson.annotations.SerializedName;

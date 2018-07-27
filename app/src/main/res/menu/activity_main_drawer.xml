@@ -7,33 +7,14 @@
 
     <item
         android:id="@+id/item_find_a_city"
-        android:icon="@drawable/ic_menu_camera"
-        android:title="Find a city"/>
+        android:title="@string/find_a_city"/>
     <item
         android:id="@+id/item_use_sensors"
-        android:icon="@drawable/ic_menu_gallery"
-        android:title="Use sensors"/>
+        android:title="@string/use_sensors"/>
     <item
         android:id="@+id/item_use_geo"
-        android:icon="@drawable/ic_menu_slideshow"
-        android:title="Use geo location"/>
-    <item
-        android:id="@+id/nav_manage"
-        android:icon="@drawable/ic_menu_manage"
-        android:title="Tools"/>
-  </group>
+        android:title="@string/use_geo_location"/>
 
-  <item android:title="Communicate">
-    <menu>
-      <item
-          android:id="@+id/nav_share"
-          android:icon="@drawable/ic_menu_share"
-          android:title="Share"/>
-      <item
-          android:id="@+id/nav_send"
-          android:icon="@drawable/ic_menu_send"
-          android:title="Send"/>
-    </menu>
-  </item>
+  </group>
 
 </menu>

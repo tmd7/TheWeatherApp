@@ -1,3 +1,9 @@
+/**
+ * The main interface. This is a circulatory system.
+ * MVP layouts communicates with each other.
+ * Callbacks
+ * Requests to the server
+ * */
 package com.tmarat.theweatherapp;
 
 import com.tmarat.theweatherapp.api.WeatherData;

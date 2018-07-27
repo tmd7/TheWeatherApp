@@ -1,3 +1,6 @@
+/**
+ * The class uses hardware sensors
+ * */
 package com.tmarat.theweatherapp.hardware;
 
 import android.content.Context;
@@ -16,6 +19,9 @@ public class Sensors {
   private SensorEventListener listenerHum;
   private SensorEventListener listenerPress;
 
+  /**
+   * The constructor uses a weak reference with context
+   * */
   public Sensors(Context context) {
     this.sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
     weatherData = new WeatherData();
@@ -39,6 +45,9 @@ public class Sensors {
     return sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
   }
 
+  /**
+   * Temperature, humidity and pressure listeners
+   * */
   private void setSensorListeners() {
     if (getSensorTem() != null) {
       listenerTem = new SensorEventListener() {
@@ -79,6 +88,9 @@ public class Sensors {
     }
   }
 
+  /**
+   * This method calls into constructor
+   * */
   private void registerSensorListener() {
     if (getSensorTem() != null) {
       sensorManager.registerListener(listenerTem, getSensorTem(), SensorManager.SENSOR_DELAY_NORMAL);
@@ -91,6 +103,9 @@ public class Sensors {
     }
   }
 
+  /**
+   * This method calls into MainActivity into method onPause()
+   * */
   public void unregisterSensorListener() {
     if (getSensorTem() != null) {
       sensorManager.unregisterListener(listenerTem,getSensorTem());
@@ -103,6 +118,9 @@ public class Sensors {
     }
   }
 
+  /**
+   * Checks if the device has sensors
+   * */
   public boolean doesNotHaveAnySensors() {
     return getSensorTem() == null || getSensorHum() == null || getSensorPress() == null;
   }

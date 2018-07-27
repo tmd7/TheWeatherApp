@@ -1,3 +1,6 @@
+/**
+ * The class uses a geo location and has a method which returns geo coordinates
+ * */
 package com.tmarat.theweatherapp.location;
 
 import android.Manifest;
@@ -33,9 +36,20 @@ public class Location implements ActivityCompat.OnRequestPermissionsResultCallba
 
   /**
    * Constructor(context, activity)
+   * Uses weak references with context and activity
+   * Doesn't save context and activity into class fields
    */
   public Location(Context context, Activity activity,
       Contract.CoordinatesCallBack coordinatesCallBack) {
+
+    initPermission(context, activity);
+    this.systemService = activity.getSystemService(LOCATION_SERVICE);
+    this.coordinatesCallBack = coordinatesCallBack;
+
+    checkPermission(activity);
+  }
+
+  private void initPermission(Context context, Activity activity) {
     this.accessCoarseLocation = ActivityCompat
         .checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION);
 
@@ -44,14 +58,11 @@ public class Location implements ActivityCompat.OnRequestPermissionsResultCallba
 
     this.permissionCallPhone = ActivityCompat
         .shouldShowRequestPermissionRationale(activity, Manifest.permission.CALL_PHONE);
-
-    this.systemService = activity.getSystemService(LOCATION_SERVICE);
-
-    this.coordinatesCallBack = coordinatesCallBack;
-
-    checkPermission(activity);
   }
 
+  /**
+   * Check if the app has permissions
+   * */
   private void checkPermission(Activity activity) {
 
     if (accessCoarseLocation == PackageManager.PERMISSION_GRANTED
@@ -76,6 +87,10 @@ public class Location implements ActivityCompat.OnRequestPermissionsResultCallba
     }
   }
 
+
+  /**
+   *If permissions are Ok, gets coordinates using the best location
+   **/
   @SuppressLint("MissingPermission")
   private void requestLocation() {
     if (accessCoarseLocation != PackageManager.PERMISSION_GRANTED
@@ -97,6 +112,7 @@ public class Location implements ActivityCompat.OnRequestPermissionsResultCallba
           latitude = location.getLatitude();
           longitude = location.getLongitude();
 
+          //The coordinates are OK, calls callback and pass it MainActivity
           coordinatesCallBack.onCoordinatesComplete(latitude, longitude);
 
           String result = String.format("latitude = %s, longitude = %s", latitude, longitude);
@@ -113,6 +129,9 @@ public class Location implements ActivityCompat.OnRequestPermissionsResultCallba
     }
   }
 
+  /**
+   * Checks if it has correct permissions
+   * */
   @Override public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
       @NonNull int[] grantResults) {
     if (requestCode == PERMISSION_REQUEST_CODE) {
