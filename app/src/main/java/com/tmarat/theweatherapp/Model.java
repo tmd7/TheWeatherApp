@@ -1,3 +1,7 @@
+/**
+ * The MainActivity is a Presenter layout from a MVP pattern design
+ * Consists link to MainActivity and Model classes
+ * */
 package com.tmarat.theweatherapp;
 
 import android.util.Log;

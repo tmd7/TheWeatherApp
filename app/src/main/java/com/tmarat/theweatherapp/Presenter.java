@@ -1,3 +1,7 @@
+/**
+ * The MainActivity is a Presenter layout from a MVP pattern design
+ * Consists link to MainActivity and Model classes
+ * */
 package com.tmarat.theweatherapp;
 
 import android.support.annotation.NonNull;
@@ -14,6 +18,10 @@ public class Presenter implements Contract.Presenter {
     this.model = new Model();
   }
 
+
+  /**
+   * The method checks an input from the user editText form from FindCityFragment
+   * */
   @Override public void checkInput(String userInput) {
     if (userInput.equals("")) {
 
@@ -21,6 +29,7 @@ public class Presenter implements Contract.Presenter {
 
     } else {
 
+      //The user input isn't empty, passes the user input to Model.class with callBack
       model.getData(userInput, new Contract.CallBack() {
 
         @Override public void onResponse(@NonNull WeatherData weatherData) {
@@ -39,6 +48,9 @@ public class Presenter implements Contract.Presenter {
     }
   }
 
+  /**
+   * The method checks coordinates which have returned from a Location.class method
+   * */
   @Override public void checkGeoCoordinates(double latitude, double longitude) {
     Log.d(TAG, "checkGeoCoordinates: " + latitude + longitude);
     if (latitude == 0 && longitude == 0) {
@@ -46,6 +58,7 @@ public class Presenter implements Contract.Presenter {
       view.showToast(R.string.coordinates_invalid);
     } else {
 
+      //Coordinates aren't empty, passes they to Model.class
       model.getCoordinates(latitude, longitude, new Contract.CallBack() {
         @Override public void onResponse(WeatherData weatherData) {
           //CallBack : return weatherData object from server

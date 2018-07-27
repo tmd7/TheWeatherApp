@@ -1,3 +1,7 @@
+/**
+ * The MainActivity is a View layout from a MVP pattern design
+ * consists link to Presenter.class
+ * */
 package com.tmarat.theweatherapp;
 
 import android.os.Bundle;
@@ -26,14 +30,14 @@ public class MainActivity extends AppCompatActivity
     NavigationView.OnNavigationItemSelectedListener, Contract.View {
 
   private static final String TAG = MainActivity.class.getSimpleName();
-
   private Toolbar toolbar;
-
   private Contract.Presenter presenter;
-  private Contract.CoordinatesCallBack coordinatesCallBack;
-
   private Sensors sensors;
 
+  /**
+   * When the activity onCreate creates and MVP classes, such as a Presenter and a Model.
+   * To next init a UI interface and starts the WelcomeFragment into the Activity.
+   * */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -45,7 +49,9 @@ public class MainActivity extends AppCompatActivity
     setupNavigationView();
 
     // TODO: 26.07.2018 if that is a first activity run, start the Welcome fragment
-    startFragment(R.id.main_container, WelcomeScreenFragment.init());
+    if (savedInstanceState == null) {
+      startFragment(R.id.main_container, WelcomeScreenFragment.init());
+    }
   }
 
   @Override protected void onPause() {
@@ -55,6 +61,9 @@ public class MainActivity extends AppCompatActivity
     }
   }
 
+  /**
+   * The method starts a fragment
+   * */
   private void startFragment(int containerViewId, Fragment fragment) {
     getSupportFragmentManager()
         .beginTransaction()
@@ -125,7 +134,7 @@ public class MainActivity extends AppCompatActivity
         break;
 
       case R.id.item_use_geo:
-        final Location location = new Location(getApplicationContext(), this,
+        new Location(getApplicationContext(), this,
             new Contract.CoordinatesCallBack() {
               @Override public void onCoordinatesComplete(double latitude, double longitude) {
                 presenter.checkGeoCoordinates(latitude, longitude);
@@ -141,6 +150,10 @@ public class MainActivity extends AppCompatActivity
     return true;
   }
 
+  /**
+   * The method init Sensors.class which works with sensors. The class has doesNotHaveAnySensors()
+   * method which returns true/false if device has sensors(temperature, humidity and pressure)
+   * */
   private void useSensors() {
     sensors = new Sensors(getApplicationContext());
     if (sensors.doesNotHaveAnySensors()) {
@@ -150,15 +163,26 @@ public class MainActivity extends AppCompatActivity
     }
   }
 
+  /**
+   * The method shows a message from an user
+   * */
   @Override public void showToast(int rsId) {
     Toast.makeText(this, rsId, Toast.LENGTH_SHORT).show();
   }
 
+
+  /**
+   * The method gets an user input in the FindCity fragment from an EditText form
+   * and passes it to Presenter.class
+   * */
   @Override public void oButtonClickListener(String userInput) {
     Log.d(TAG, "oButtonClickListener: user input " + userInput);
     presenter.checkInput(userInput);
   }
 
+  /**
+   * The method starts WeatherInfoFragment with weather data(temperature, humidity, pressure)
+   * */
   @Override public void setWeatherData(WeatherData weatherData) {
     startFragment(R.id.main_container, WeatherInfoFragment.init(weatherData));
   }
