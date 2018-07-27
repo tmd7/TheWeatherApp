@@ -38,4 +38,28 @@ public class Presenter implements Contract.Presenter {
       });
     }
   }
+
+  @Override public void checkGeoCoordinates(double latitude, double longitude) {
+    Log.d(TAG, "checkGeoCoordinates: " + latitude + longitude);
+    if (latitude == 0 && longitude == 0) {
+
+      view.showToast(R.string.coordinates_invalid);
+    } else {
+
+      model.getCoordinates(latitude, longitude, new Contract.CallBack() {
+        @Override public void onResponse(WeatherData weatherData) {
+          //CallBack : return weatherData object from server
+          Log.d(TAG, "onResponse: " + weatherData.getCityName());
+
+          //Passes data to activity
+          view.setWeatherData(weatherData);
+        }
+
+        @Override public void onFailure() {
+          //Callback from model : City don't found or server isn't responding
+          view.showToast(R.string.server_is_not_responding);
+        }
+      });
+    }
+  }
 }

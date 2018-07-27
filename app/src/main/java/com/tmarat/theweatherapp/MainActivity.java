@@ -28,7 +28,9 @@ public class MainActivity extends AppCompatActivity
   private static final String TAG = MainActivity.class.getSimpleName();
 
   private Toolbar toolbar;
+
   private Contract.Presenter presenter;
+  private Contract.CoordinatesCallBack coordinatesCallBack;
 
   private Sensors sensors;
 
@@ -44,6 +46,13 @@ public class MainActivity extends AppCompatActivity
 
     // TODO: 26.07.2018 if that is a first activity run, start the Welcome fragment
     startFragment(R.id.main_container, WelcomeScreenFragment.init());
+  }
+
+  @Override protected void onPause() {
+    super.onPause();
+    if (sensors != null) {
+      sensors.unregisterSensorListener();
+    }
   }
 
   private void startFragment(int containerViewId, Fragment fragment) {
@@ -116,7 +125,14 @@ public class MainActivity extends AppCompatActivity
         break;
 
       case R.id.item_use_geo:
-        new Location(getApplicationContext(), this);
+        final Location location = new Location(getApplicationContext(), this,
+            new Contract.CoordinatesCallBack() {
+              @Override public void onCoordinatesComplete(double latitude, double longitude) {
+                presenter.checkGeoCoordinates(latitude, longitude);
+              }
+            });
+
+
         break;
     }
 

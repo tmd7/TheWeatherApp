@@ -1,5 +1,6 @@
 package com.tmarat.theweatherapp.api;
 
+import android.renderscript.Sampler;
 import com.tmarat.theweatherapp.Contract;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -9,11 +10,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MyRetrofit {
   private static final String BASE_URL = "http://api.openweathermap.org/";
-  private static final String UNITS = "metric";
+  //private static final String UNITS = "metric";
   private static final String API = "be4254a9c1592f329d3b479b522e69c3";
 
-  private MyRetrofit() {
-    //use lazy inti = initRetrofit()
+  private String latitude;
+  private String longitude;
+
+  private Retrofit retrofit;
+
+  public MyRetrofit(String cityName) {
+    //lazy init
   }
 
   public static Call<WeatherRequest> initRetrofit(String cityName) {
@@ -24,8 +30,21 @@ public class MyRetrofit {
         .client(getClient())
         .build();
 
-    return retrofit.create(Contract.OpenWeather.class).loadWeather(cityName, API);
+    return retrofit.create(Contract.OpenWeather.class)
+        .getWeatherByCityName(cityName, API);
   }
+
+  public static Call<WeatherRequest> initRetrofit(double latitude, double longitude) {
+    Retrofit retrofit = new Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(getClient())
+        .build();
+
+    return retrofit.create(Contract.OpenWeather.class)
+        .getWeatherByCoordinate(String.valueOf(latitude), String.valueOf(longitude), API);
+  }
+
 
   private static OkHttpClient getClient() {
     OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
@@ -33,6 +52,7 @@ public class MyRetrofit {
     HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
     logging.setLevel(HttpLoggingInterceptor.Level.BODY);
     httpClient.addInterceptor(logging);
+
     return httpClient.build();
   }
 }

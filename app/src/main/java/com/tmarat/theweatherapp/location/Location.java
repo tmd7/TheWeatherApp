@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import com.tmarat.theweatherapp.Contract;
 
 import static android.content.Context.LOCATION_SERVICE;
 
@@ -25,13 +26,16 @@ public class Location implements ActivityCompat.OnRequestPermissionsResultCallba
   private boolean permissionCallPhone;
   private Object systemService;
 
-  private String latitude;
-  private String longitude;
+  private double latitude;
+  private double longitude;
+
+  private Contract.CoordinatesCallBack coordinatesCallBack;
 
   /**
    * Constructor(context, activity)
    */
-  public Location(Context context, Activity activity) {
+  public Location(Context context, Activity activity,
+      Contract.CoordinatesCallBack coordinatesCallBack) {
     this.accessCoarseLocation = ActivityCompat
         .checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION);
 
@@ -43,15 +47,9 @@ public class Location implements ActivityCompat.OnRequestPermissionsResultCallba
 
     this.systemService = activity.getSystemService(LOCATION_SERVICE);
 
+    this.coordinatesCallBack = coordinatesCallBack;
+
     checkPermission(activity);
-  }
-
-  public String getLatitude() {
-    return latitude;
-  }
-
-  public String getLongitude() {
-    return longitude;
   }
 
   private void checkPermission(Activity activity) {
@@ -96,8 +94,10 @@ public class Location implements ActivityCompat.OnRequestPermissionsResultCallba
 
       locationManager.requestLocationUpdates(provider, 10_000, 10, new LocationListener() {
         @Override public void onLocationChanged(android.location.Location location) {
-          latitude = Double.toString(location.getLatitude());
-          longitude = Double.toString(location.getLongitude());
+          latitude = location.getLatitude();
+          longitude = location.getLongitude();
+
+          coordinatesCallBack.onCoordinatesComplete(latitude, longitude);
 
           String result = String.format("latitude = %s, longitude = %s", latitude, longitude);
           Log.d(TAG, "onLocationChanged: " + result);

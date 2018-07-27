@@ -15,7 +15,7 @@ public class Model implements Contract.Model {
   @Override public void getData(String userInput,
       final Contract.CallBack callBack) {
 
-    //userInput is not empty, to do a request
+    //userInput is not empty, to do a request using userInput(city name)
     MyRetrofit.initRetrofit(userInput).enqueue(new Callback<WeatherRequest>() {
       @Override
       public void onResponse(Call<WeatherRequest> call, Response<WeatherRequest> response) {
@@ -33,7 +33,33 @@ public class Model implements Contract.Model {
       }
 
       @Override public void onFailure(Call<WeatherRequest> call, Throwable t) {
-        Log.d(TAG, "onFailure: ");
+        Log.d(TAG, "onFailure: getWeather by city name");
+        callBack.onFailure();
+      }
+    });
+  }
+
+  @Override public void getCoordinates(double latitude,
+      double longitude, final Contract.CallBack callBack) {
+
+    MyRetrofit.initRetrofit(latitude, longitude).enqueue(new Callback<WeatherRequest>() {
+      @Override
+      public void onResponse(Call<WeatherRequest> call, Response<WeatherRequest> response) {
+
+        if (response.body() != null) {
+
+          Log.d(TAG, "onResponse: body != null");
+          wrapResponse(response.body());
+          callBack.onResponse(WeatherData.init().getWeatherData());
+
+        } else {
+
+          callBack.onFailure();
+        }
+      }
+
+      @Override public void onFailure(Call<WeatherRequest> call, Throwable t) {
+        Log.d(TAG, "onFailure: getWeather by coordinates");
         callBack.onFailure();
       }
     });
