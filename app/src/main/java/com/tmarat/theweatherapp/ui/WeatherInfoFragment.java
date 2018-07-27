@@ -52,16 +52,22 @@ public class WeatherInfoFragment extends Fragment {
   }
 
   private void setWeatherData() {
+
     WeatherData weatherData = getWeatherData();
     textViewCityName.setText(weatherData.getCityName());
     textViewDate.setText(getCurrentDate());
     textViewTem.setText(weatherData.getTem());
-    textViewPress.setText(weatherData.getPress());
-    textViewHum.setText(weatherData.getHum());
-    textViewWind.setText(weatherData.getWind());
+
+    String press = getString(R.string.pressure, weatherData.getPress());
+    String hum = getString(R.string.humidity, weatherData.getHum());
+    String wind = getString(R.string.wind, weatherData.getWind());
+    textViewPress.setText(press);
+    textViewHum.setText(hum);
+    textViewWind.setText(wind);
   }
 
   private void setupUI(View view) {
+
     textViewCityName = view.findViewById(R.id.header_city_name);
     textViewDate = view.findViewById(R.id.header_date);
     textViewTem = view.findViewById(R.id.tem);
@@ -71,6 +77,7 @@ public class WeatherInfoFragment extends Fragment {
   }
 
   public String getCurrentDate() {
+
     Calendar calendar = Calendar.getInstance();
     return new SimpleDateFormat("yyyy-MM-dd", Locale.UK).format(calendar.getTime());
   }

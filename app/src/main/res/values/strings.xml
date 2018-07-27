@@ -7,9 +7,9 @@
   <string name="nav_header_desc">Navigation header</string>
   <string name="action_settings">Settings</string>
   <string name="symbol_grade">°</string>
-  <string name="pressure">Pressure: %c, hPa</string>
-  <string name="humidity">Humidity: %c, %</string>
-  <string name="wind">Wind: %c, meter/sec</string>
+  <string name="pressure">Pressure: %s, hPa</string>
+  <string name="humidity">Humidity: %s, %</string>
+  <string name="wind">Wind: %s, meter/sec</string>
   <string name="find_city">Find city</string>
   <string name="sensors">Sensors</string>
   <string name="use_geo">Use geo</string>
